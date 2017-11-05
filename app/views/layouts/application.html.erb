@@ -8,8 +8,22 @@
   <%= analytics_init if Rails.env.production? %>
 </head>
 <body>
+	<h1>Flatiron Store, Welcome!</h1>
 
 <%= render 'layouts/header' %>
+
+<% if user_signed_in? %>
+	<li>Signed in as <%= current_user.email %></li>
+	<li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+<% else %>
+	<li><%= link_to "sign in", new_user_session_path %></li>
+	<li><%= link_to "Sign up", new_user_registration_path %></li>
+<% end %>
+
+<%= content_tag(:div, flash[:error], :id => "flash_error", :class => "error") if flash[:error] %>
+<%= content_tag(:div, flash[:notice], :id => "flash_notice", :class => "notice") if flash[:notice] %>
+<%= content_tag(:div, flash[:alert], :id => "flash_alert", :class => "alert") if flash[:alert] %>
+
 <%= yield %>
 
 </body>
