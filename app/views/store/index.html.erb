@@ -8,7 +8,7 @@
 <h2>Available Items: </h2>
 <% @items.each do |item| %>
  
-  <p><%= item.title %> | $<%= item.price.to_f/100 %> | <%= button_to 'Add to Cart', line_items_path(item_id: item) if user_signed_in? %></p>
+  <p><%= item.title %> | $<%= show_price(item.price) %> | <%= button_to 'Add to Cart', line_items_path(item_id: item) if user_signed_in? %></p>
 <% end %>
 
 	
